@@ -3,10 +3,10 @@ import csv
 
 targe_filename = "HBYC_Line2_Kiln_2021_Jan_12.csv"
 
-path = "Data/" + targe_filename
+path = "HXData/" + targe_filename
 
 #实际处理 注释掉这行
-path = "DataSample/" + targe_filename
+path = "HXDataSample/" + targe_filename
 
 newpath = "ProcessedData/" + targe_filename
 
