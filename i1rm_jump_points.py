@@ -1,6 +1,9 @@
 import csv
 
+'''
+根据csv原始数据中： 窑味料量、尾煤、头煤的变化 去掉一定前后区间的间跃值
 
+'''
 targe_filename = "HBYC_Line2_Kiln_2021_Jan_12.csv"
 
 path = "HXData/" + targe_filename
@@ -8,7 +11,7 @@ path = "HXData/" + targe_filename
 #实际处理 注释掉这行
 path = "HXDataSample/" + targe_filename
 
-newpath = "ProcessedData/" + targe_filename
+newpath = "HXProcessedData/" + targe_filename
 
 bufsize = 65536
 
