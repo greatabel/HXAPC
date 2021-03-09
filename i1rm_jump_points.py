@@ -21,6 +21,7 @@ path = "HXData/" + targe_filename
 newpath = "HXProcessedData/" + targe_filename
 
 bufsize = 65536
+#实际处理 注释掉这行
 # bufsize = 5000
 
 #窑味料量
@@ -43,13 +44,17 @@ def process(lines):
             排除掉文件开始2行，
             并且保证数值开始的这一行，之后的一行，和变化前的一行都不同（只有1行变化也许是异常)
             '''
-            if  items_prev[Feeding_index] not in  ('Kiln_Feed_SP', '窑喂料量') and \
+            if  (items_prev[Feeding_index] not in  ('Kiln_Feed_SP', '窑喂料量') and \
                 items_prev[Feeding_index] != items[Feeding_index] and  \
-                items_prev[Feeding_index] != items_next[Feeding_index]:
+                items_prev[Feeding_index] != items_next[Feeding_index]) or \
+                (items_prev[HeadCoal_index] not in  ('Kiln_Burner_Coal_SP', '头煤') and \
+                items_prev[HeadCoal_index] != items[HeadCoal_index] and  \
+                items_prev[HeadCoal_index] != items_next[HeadCoal_index]):
                 d = datetime.strptime(items[0], "%Y/%m/%d %H:%M:%S")
                 if d not in time_need_removed:
                     time_need_removed.append(d)
-                    print(i, items_prev[Feeding_index],items[Feeding_index],items_next[Feeding_index], items[0])
+                    print(i, items_prev[Feeding_index],items[Feeding_index],items_next[Feeding_index], 
+                        items_prev[HeadCoal_index],items[HeadCoal_index],items_next[HeadCoal_index],items[0])
                 # 删除变化前后1分钟的值
                 # d0 = d - timedelta(hours=0, minutes=1)
                 # d1 = d + timedelta(hours=0, minutes=1)               
