@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
  https://stackoverflow.com/questions/16286991/converting-yyyy-mm-dd-hhmmss-date-time
 
 '''
-targe_filename = "HBYC_Line2_Kiln_2021_Jan_12.csv"
+targe_filename = "HBYC_Line2_Kiln_2021_Jan_12_28.csv"
 
 path = "HXData/" + targe_filename
 
@@ -20,7 +20,7 @@ path = "HXData/" + targe_filename
 
 newpath = "HXProcessedData/" + targe_filename
 
-bufsize = 65536*6
+bufsize = 65536*6*3
 #实际处理 注释掉这行
 # bufsize = 5000
 
@@ -69,8 +69,8 @@ def process(lines):
             if items[0] not in ('timestamp', '_Temp_f'):
                 i_time = datetime.strptime(items[0], "%Y/%m/%d %H:%M:%S")
                 for d in time_need_removed:
-                    d0 = d - timedelta(hours=0, minutes=5)
-                    d1 = d + timedelta(hours=0, minutes=5)
+                    d0 = d - timedelta(hours=0, minutes=15)
+                    d1 = d + timedelta(hours=0, minutes=15)
                     if i_time >= d0 and i_time <= d1:
                         rm_count += 1
                         print(i_time)
