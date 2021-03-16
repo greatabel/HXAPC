@@ -84,7 +84,15 @@ def main():
             rows = scan_for_change(lines)
     print(len(time_points_of_changes), time_points_of_changes[0:10])
 
-    
+    small_delta = timedelta(
+        days=0,
+        seconds=0,
+        microseconds=0,
+        milliseconds=0,
+        minutes=5,
+        hours=0,
+        weeks=0
+    )
     # 找出想要保留的时间区间列表
     for i in range(0, len(time_points_of_changes)):
         if i + 1 < len(time_points_of_changes):
@@ -94,7 +102,8 @@ def main():
             span = d_next - d
             print('#'*10, d, d_next)
             print(span, '@'*5, d+(span/3), d+(span*2/3))
-            filter_spans.append((d+(span/3), d+(span*2/3)))
+            if span >= small_delta:
+                filter_spans.append((d+(span/3), d+(span*2/3)))
 
     print('\n')
     # print(filter_spans[0][0], filter_spans[0][1])
