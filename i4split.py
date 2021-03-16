@@ -27,7 +27,7 @@ path = "HXProcessedData/" + targe_filename
 newpath_train = "HXProcessedData/HBYC_Line2_Kiln_2021_Jan_12_28train.csv"
 newpath_test = "HXProcessedData/HBYC_Line2_Kiln_2021_Jan_12_28test.csv"
 
-bufsize = 65536*6*5
+bufsize = 65536
 #实际处理 注释掉这行
 # bufsize = 5000
 
@@ -68,23 +68,29 @@ def main():
             # print('process len(rows)=', len(rows), rows, '-'*10, '\n')
             # for r in rows:
             #     print(r, '#'*10, '\n')
-            with open(newpath_train, "a", newline="") as csvfile:                            
-                writer = csv.writer(csvfile) 
+            with open(newpath_train, "a", newline='') as csvfile0:                            
+                writer0 = csv.writer(csvfile0, lineterminator='\n') 
 
                 # if write_count == 0:
                 #     writer.writerow(header)
                 # write_count += 1
                 for row in rows0:
-                    writer.writerow(row.split(','))
+                    t = row.split(',')
+                    for i in range(0, len(t)):
+                        t[i]=t[i].replace('\"', '')
+                    if any(field.strip() for field in t):
+                        writer0.writerow(t)
 
-            with open(newpath_test, "a", newline="") as csvfile:                            
-                writer = csv.writer(csvfile) 
+            with open(newpath_test, "a", newline='') as csvfile1:                            
+                writer1 = csv.writer(csvfile1,lineterminator='\n') 
 
-                # if write_count == 0:
-                #     writer.writerow(header)
-                # write_count += 1
                 for row in rows1:
-                    writer.writerow(row.split(','))
+                    t = row.split(',')
+                    for i in range(0, len(t)):
+                        t[i]=t[i].replace('\"', '')
+                    if any(field.strip() for field in t):
+                        writer1.writerow(t)
 
 if __name__ == "__main__":
     main()
+

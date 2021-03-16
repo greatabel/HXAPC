@@ -89,8 +89,8 @@ def main():
         seconds=0,
         microseconds=0,
         milliseconds=0,
-        minutes=5,
-        hours=0,
+        minutes=0,
+        hours=1,
         weeks=0
     )
     # 找出想要保留的时间区间列表
@@ -119,7 +119,7 @@ def main():
             # print('process len(rows)=', len(rows), rows, '-'*10, '\n')
             # for r in rows:
             #     print(r, '#'*10, '\n')
-            with open(newpath, "a", newline="") as csvfile:                            
+            with open(newpath, "a", newline='') as csvfile:                            
                 writer = csv.writer(csvfile) 
 
                 # if write_count == 0:
